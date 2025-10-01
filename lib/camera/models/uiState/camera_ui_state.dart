@@ -8,7 +8,10 @@ abstract class CameraUiState with _$CameraUiState {
   factory CameraUiState({
     required bool isInitialized,
     required bool isRecording,
+    @Default(false) bool isInitializing,
     @Default([]) List<camera_lib.CameraDescription> cameras,
+    @Default(0) int currenStep,
+    @Default(false) bool isValidatingStep,
   }) = _CameraUiState;
 
   // factory CameraUiState.fromJson(Map<String, dynamic> json) =>

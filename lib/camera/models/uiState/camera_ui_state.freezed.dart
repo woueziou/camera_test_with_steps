@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CameraUiState {
 
- bool get isInitialized; bool get isRecording; List<camera_lib.CameraDescription> get cameras;
+ bool get isInitialized; bool get isRecording; bool get isInitializing; List<camera_lib.CameraDescription> get cameras; int get currenStep; bool get isValidatingStep;
 /// Create a copy of CameraUiState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CameraUiStateCopyWith<CameraUiState> get copyWith => _$CameraUiStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CameraUiState&&(identical(other.isInitialized, isInitialized) || other.isInitialized == isInitialized)&&(identical(other.isRecording, isRecording) || other.isRecording == isRecording)&&const DeepCollectionEquality().equals(other.cameras, cameras));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CameraUiState&&(identical(other.isInitialized, isInitialized) || other.isInitialized == isInitialized)&&(identical(other.isRecording, isRecording) || other.isRecording == isRecording)&&(identical(other.isInitializing, isInitializing) || other.isInitializing == isInitializing)&&const DeepCollectionEquality().equals(other.cameras, cameras)&&(identical(other.currenStep, currenStep) || other.currenStep == currenStep)&&(identical(other.isValidatingStep, isValidatingStep) || other.isValidatingStep == isValidatingStep));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isInitialized,isRecording,const DeepCollectionEquality().hash(cameras));
+int get hashCode => Object.hash(runtimeType,isInitialized,isRecording,isInitializing,const DeepCollectionEquality().hash(cameras),currenStep,isValidatingStep);
 
 @override
 String toString() {
-  return 'CameraUiState(isInitialized: $isInitialized, isRecording: $isRecording, cameras: $cameras)';
+  return 'CameraUiState(isInitialized: $isInitialized, isRecording: $isRecording, isInitializing: $isInitializing, cameras: $cameras, currenStep: $currenStep, isValidatingStep: $isValidatingStep)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CameraUiStateCopyWith<$Res>  {
   factory $CameraUiStateCopyWith(CameraUiState value, $Res Function(CameraUiState) _then) = _$CameraUiStateCopyWithImpl;
 @useResult
 $Res call({
- bool isInitialized, bool isRecording, List<camera_lib.CameraDescription> cameras
+ bool isInitialized, bool isRecording, bool isInitializing, List<camera_lib.CameraDescription> cameras, int currenStep, bool isValidatingStep
 });
 
 
@@ -62,12 +62,15 @@ class _$CameraUiStateCopyWithImpl<$Res>
 
 /// Create a copy of CameraUiState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isInitialized = null,Object? isRecording = null,Object? cameras = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isInitialized = null,Object? isRecording = null,Object? isInitializing = null,Object? cameras = null,Object? currenStep = null,Object? isValidatingStep = null,}) {
   return _then(_self.copyWith(
 isInitialized: null == isInitialized ? _self.isInitialized : isInitialized // ignore: cast_nullable_to_non_nullable
 as bool,isRecording: null == isRecording ? _self.isRecording : isRecording // ignore: cast_nullable_to_non_nullable
+as bool,isInitializing: null == isInitializing ? _self.isInitializing : isInitializing // ignore: cast_nullable_to_non_nullable
 as bool,cameras: null == cameras ? _self.cameras : cameras // ignore: cast_nullable_to_non_nullable
-as List<camera_lib.CameraDescription>,
+as List<camera_lib.CameraDescription>,currenStep: null == currenStep ? _self.currenStep : currenStep // ignore: cast_nullable_to_non_nullable
+as int,isValidatingStep: null == isValidatingStep ? _self.isValidatingStep : isValidatingStep // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -152,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isInitialized,  bool isRecording,  List<camera_lib.CameraDescription> cameras)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isInitialized,  bool isRecording,  bool isInitializing,  List<camera_lib.CameraDescription> cameras,  int currenStep,  bool isValidatingStep)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CameraUiState() when $default != null:
-return $default(_that.isInitialized,_that.isRecording,_that.cameras);case _:
+return $default(_that.isInitialized,_that.isRecording,_that.isInitializing,_that.cameras,_that.currenStep,_that.isValidatingStep);case _:
   return orElse();
 
 }
@@ -173,10 +176,10 @@ return $default(_that.isInitialized,_that.isRecording,_that.cameras);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isInitialized,  bool isRecording,  List<camera_lib.CameraDescription> cameras)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isInitialized,  bool isRecording,  bool isInitializing,  List<camera_lib.CameraDescription> cameras,  int currenStep,  bool isValidatingStep)  $default,) {final _that = this;
 switch (_that) {
 case _CameraUiState():
-return $default(_that.isInitialized,_that.isRecording,_that.cameras);case _:
+return $default(_that.isInitialized,_that.isRecording,_that.isInitializing,_that.cameras,_that.currenStep,_that.isValidatingStep);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +196,10 @@ return $default(_that.isInitialized,_that.isRecording,_that.cameras);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isInitialized,  bool isRecording,  List<camera_lib.CameraDescription> cameras)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isInitialized,  bool isRecording,  bool isInitializing,  List<camera_lib.CameraDescription> cameras,  int currenStep,  bool isValidatingStep)?  $default,) {final _that = this;
 switch (_that) {
 case _CameraUiState() when $default != null:
-return $default(_that.isInitialized,_that.isRecording,_that.cameras);case _:
+return $default(_that.isInitialized,_that.isRecording,_that.isInitializing,_that.cameras,_that.currenStep,_that.isValidatingStep);case _:
   return null;
 
 }
@@ -208,11 +211,12 @@ return $default(_that.isInitialized,_that.isRecording,_that.cameras);case _:
 
 
 class _CameraUiState implements CameraUiState {
-   _CameraUiState({required this.isInitialized, required this.isRecording, final  List<camera_lib.CameraDescription> cameras = const []}): _cameras = cameras;
+   _CameraUiState({required this.isInitialized, required this.isRecording, this.isInitializing = false, final  List<camera_lib.CameraDescription> cameras = const [], this.currenStep = 0, this.isValidatingStep = false}): _cameras = cameras;
   
 
 @override final  bool isInitialized;
 @override final  bool isRecording;
+@override@JsonKey() final  bool isInitializing;
  final  List<camera_lib.CameraDescription> _cameras;
 @override@JsonKey() List<camera_lib.CameraDescription> get cameras {
   if (_cameras is EqualUnmodifiableListView) return _cameras;
@@ -220,6 +224,8 @@ class _CameraUiState implements CameraUiState {
   return EqualUnmodifiableListView(_cameras);
 }
 
+@override@JsonKey() final  int currenStep;
+@override@JsonKey() final  bool isValidatingStep;
 
 /// Create a copy of CameraUiState
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +237,16 @@ _$CameraUiStateCopyWith<_CameraUiState> get copyWith => __$CameraUiStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CameraUiState&&(identical(other.isInitialized, isInitialized) || other.isInitialized == isInitialized)&&(identical(other.isRecording, isRecording) || other.isRecording == isRecording)&&const DeepCollectionEquality().equals(other._cameras, _cameras));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CameraUiState&&(identical(other.isInitialized, isInitialized) || other.isInitialized == isInitialized)&&(identical(other.isRecording, isRecording) || other.isRecording == isRecording)&&(identical(other.isInitializing, isInitializing) || other.isInitializing == isInitializing)&&const DeepCollectionEquality().equals(other._cameras, _cameras)&&(identical(other.currenStep, currenStep) || other.currenStep == currenStep)&&(identical(other.isValidatingStep, isValidatingStep) || other.isValidatingStep == isValidatingStep));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isInitialized,isRecording,const DeepCollectionEquality().hash(_cameras));
+int get hashCode => Object.hash(runtimeType,isInitialized,isRecording,isInitializing,const DeepCollectionEquality().hash(_cameras),currenStep,isValidatingStep);
 
 @override
 String toString() {
-  return 'CameraUiState(isInitialized: $isInitialized, isRecording: $isRecording, cameras: $cameras)';
+  return 'CameraUiState(isInitialized: $isInitialized, isRecording: $isRecording, isInitializing: $isInitializing, cameras: $cameras, currenStep: $currenStep, isValidatingStep: $isValidatingStep)';
 }
 
 
@@ -251,7 +257,7 @@ abstract mixin class _$CameraUiStateCopyWith<$Res> implements $CameraUiStateCopy
   factory _$CameraUiStateCopyWith(_CameraUiState value, $Res Function(_CameraUiState) _then) = __$CameraUiStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isInitialized, bool isRecording, List<camera_lib.CameraDescription> cameras
+ bool isInitialized, bool isRecording, bool isInitializing, List<camera_lib.CameraDescription> cameras, int currenStep, bool isValidatingStep
 });
 
 
@@ -268,12 +274,15 @@ class __$CameraUiStateCopyWithImpl<$Res>
 
 /// Create a copy of CameraUiState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isInitialized = null,Object? isRecording = null,Object? cameras = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isInitialized = null,Object? isRecording = null,Object? isInitializing = null,Object? cameras = null,Object? currenStep = null,Object? isValidatingStep = null,}) {
   return _then(_CameraUiState(
 isInitialized: null == isInitialized ? _self.isInitialized : isInitialized // ignore: cast_nullable_to_non_nullable
 as bool,isRecording: null == isRecording ? _self.isRecording : isRecording // ignore: cast_nullable_to_non_nullable
+as bool,isInitializing: null == isInitializing ? _self.isInitializing : isInitializing // ignore: cast_nullable_to_non_nullable
 as bool,cameras: null == cameras ? _self._cameras : cameras // ignore: cast_nullable_to_non_nullable
-as List<camera_lib.CameraDescription>,
+as List<camera_lib.CameraDescription>,currenStep: null == currenStep ? _self.currenStep : currenStep // ignore: cast_nullable_to_non_nullable
+as int,isValidatingStep: null == isValidatingStep ? _self.isValidatingStep : isValidatingStep // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
